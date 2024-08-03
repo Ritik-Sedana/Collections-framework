@@ -13,7 +13,14 @@ public class App  {
 //        learnArrayList();
 //        learnStack();
 //        learnQueue();
-        learnStream();
+//        learnPriorityQueue();
+//        learnArrayDeque();
+//        learnSet();
+//        learnMap();
+//        learnArraysClass();
+//        learnCollectionsClass();
+//        learnStream();
+
     }
 
     public static void learnArrayList() {
@@ -101,7 +108,199 @@ public class App  {
         System.out.println(queue.element()); // throws exception if empty
 
     }
+    public static void learnPriorityQueue() {
+        System.out.println("<......PriorityQueue...........>");
 
+        Queue<Integer> pq = new PriorityQueue<>(); // can be PriorityQueue<Integer> pq =
+        pq.add(3);
+        pq.add(1);
+        pq.offer(2);
+        System.out.println(pq.poll());
+        System.out.println(pq);
+        System.out.println(pq.peek());
+
+        PriorityQueue<Integer> pq2 = new PriorityQueue<>(Comparator.reverseOrder());
+        pq2.add(3);
+        pq2.add(1);
+        pq2.offer(2);
+        System.out.println(pq2.poll());
+        System.out.println(pq2);
+        System.out.println(pq2.peek());
+
+
+    }
+    public static void learnArrayDeque() {
+        System.out.println("<.......Deque..........>");
+        ArrayDeque<Integer> ad = new ArrayDeque<>();
+        ad.offer(1);
+        ad.add(2);
+        ad.offerFirst(50);
+        ad.offerLast(-2);
+        System.out.println(ad);
+        System.out.println(ad.pollFirst());
+        System.out.println(ad.pollLast());
+        // peekFirst and peekLast similarly
+
+    }
+    public static void learnSet() {
+        Set<Integer> st = new HashSet<>();
+        st.add(2);
+        st.add(3);
+        st.add(1);
+        st.add(4);
+        st.add(5);
+        System.out.println(st);//random order and also use hashing
+        System.out.println(st.contains(4)  + ":" + st. contains(20) + ":" + st.isEmpty());
+        st.clear();
+        Set<Integer> st2 = new LinkedHashSet<>(); // maintain order
+        st2.add(2);
+        st2.add(3);
+        st2.add(1);
+        st2.add(4);
+        st2.add(5);
+        System.out.println(st2);//random order and also use hashing
+        System.out.println(st2.contains(4)  + ":" + st2. contains(20) + ":" + st2.isEmpty());
+        st2.clear();
+        Set<Integer> st3 = new TreeSet<>(); // sort
+        st3.add(2);
+        st3.add(3);
+        st3.add(1);
+        st3.add(4);
+        st3.add(5);
+        System.out.println(st3);//random order and also use hashing
+        System.out.println(st3.contains(4)  + ":" + st3. contains(20) + ":" + st3.isEmpty());
+        st3.clear();
+    // custom class set
+         class test {
+            String name ="testing";
+            test(String name) {
+                this.name = name;
+            }
+            @Override
+             public String toString(){
+                return "name : " + name;
+            }
+
+             @Override
+             public boolean equals(Object o) {
+                 if (this == o) return true;
+                 if (o == null || getClass() != o.getClass()) return false;
+                 test test = (test) o;
+                 return Objects.equals(name, test.name);
+             }
+
+             @Override
+             public int hashCode() {
+                 return Objects.hashCode(name);
+             }
+         }
+         Set<test> st4 = new HashSet<>();
+         st4.add(new test("test1"));
+         st4.add(new test("test2"));
+         st4.add(new test("test2"));
+         System.out.println(st4);
+
+
+
+    }
+
+    public static void learnMap() {
+        Map<Integer, Integer> mp = new HashMap<>();
+        mp.put(1,3);
+        mp.put(2,4);
+        System.out.println(mp);
+        if(!mp.containsKey(1)) { // containsValue is also present
+            mp.put(1,8);
+        }
+        //easy way is
+        mp.putIfAbsent(1,0);
+        System.out.println(mp);
+    // iteration in map
+        for(Map.Entry<Integer,Integer> entry : mp.entrySet()) {
+            System.out.println(entry.getKey());
+        }
+        Map<Integer, Integer> mp2 = new TreeMap<>(); // add to binary search tree
+        mp2.put(1,3);
+        mp2.put(2,4);
+        System.out.println(mp2);
+        if(!mp2.containsKey(1)) { // containsValue is also present
+            mp2.put(1,8);
+        }
+        //easy way is
+        mp2.putIfAbsent(1,0);
+        System.out.println(mp2);
+        mp2.remove(1);
+        // iteration in map
+        for(Map.Entry<Integer,Integer> entry : mp2.entrySet()) {
+            System.out.println(entry.getKey());
+        }
+
+    }
+    public static void learnArraysClass ()  {
+        int num[] ={1,2,3,4,5,6,7,8,9};
+        int index = Arrays.binarySearch(num, 4); //array should be sorted
+        System.out.println(index);
+        Arrays.sort(num);
+//        Arrays.sort(num, Collections.reverseOrder()); it should be Integer type for using collections.reverseOrder
+        Arrays.fill(num,1);
+
+        System.out.println(Arrays.toString(num));
+
+    }
+    public static void learnCollectionsClass () {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        System.out.println(Collections.min(list));
+        System.out.println(Collections.max(list));
+        System.out.println(Collections.frequency(list, 1));
+        Collections.sort(list, Collections.reverseOrder()); // can be Comparator.reverseOrder
+        class test implements Comparable<test> {
+            String name ="testing";
+            test(String name) {
+                this.name = name;
+            }
+            @Override
+            public String toString(){
+                return "name : " + name;
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+                test test = (test) o;
+                return Objects.equals(name, test.name);
+            }
+
+            @Override
+            public int hashCode() {
+                return Objects.hashCode(name);
+            }
+            // need compareTo
+            @Override
+            public int compareTo(test otherTest) {
+                return this.name.compareTo(otherTest.name);
+            }
+
+        }
+        List<test> list2 = new ArrayList<>();
+        list2.add(new test("test2"));
+        list2.add(new test("test1"));
+
+        Collections.sort(list2);
+        System.out.println(list2);
+        Collections.sort(list2, new Comparator<test>() {
+            @Override
+            public int compare(test o1, test o2) {
+                return o2.name.compareTo(o1.name);
+            }
+        });
+        System.out.println(list2);
+        Collections.sort(list2, (o1,o2) -> o1.name.compareTo(o2.name));
+        System.out.println(list2);
+
+    }
     public static void learnStream() {
         System.out.println("<.......Stream..........>");
 
@@ -266,10 +465,11 @@ public class App  {
 
 
 
-/*The map method is an intermediate operation in Java Streams that takes each element in the stream and applies a function to it, transforming it into a new element. This transformation produces a new stream of the transformed elements.*/
+        /*The map method is an intermediate operation in Java Streams that takes each element in the stream and applies a function to it, transforming it into a new element. This transformation produces a new stream of the transformed elements.*/
 
 
 
 
     }
+
 }
